@@ -2,39 +2,21 @@ const express = require('express'),
     app = express(),
     port = 3000,
     data = require('./data'),
+    bc = require('./book_controller'),
     bodyParser = require('body-parser');
 
 // Top - level middleware endpoints
 app.use(bodyParser.json());
 
-// CRUD Create Post
-app.post('/api/addBook', (req, res, next) => {
-    console.log(req.body);
-    data.push(req.body)
-    res
-        .status(200)
-        .send(data);
-})
+// CRUD 
+// Create Post
+app.post('/api/addBook', bc.post )
 // Read Get
-app.get('/api/getBooks', (req, res, next) => {
-    res
-        .status(200)
-        .send({books: data})
-
-})
-
-app.put('/api/updateBook/:index/:name', (req, res, next) => {
-    console.log(req.params)
-    data[req.params.index].name = req.params.name;
-    res
-        .status(200)
-        .send(data);
-})
-
-app.delete('/api/deleteIt/:index', (req, res, next) => {
-    data.splice(req.params.index, 1)
-    res.status(200).send(data);
-})
+app.get('/api/getBooks', bc.get)
+// Update Put
+app.put('/api/updateBook/:index/:name', bc.put)
+// Delete Delete
+app.delete('/api/deleteIt/:index', bc.delete)
 // Update Put Delete Delete axios.get('/api/mydata').then()
 // app.get('/api/mydata') Methods need to match app.METHOD(URL, HANDLER);
 // - METHOD --- get, put, post, delete
