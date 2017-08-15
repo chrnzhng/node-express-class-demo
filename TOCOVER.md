@@ -19,6 +19,8 @@ This is a list of topics that we'll be covering in today's lecture. Feel free to
 ### package-lock.json
 
 ## Yarn
+- yarn add <package name>
+- yarn install
 
 ---
 
